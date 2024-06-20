@@ -15,10 +15,26 @@ services:
     container_name: rustapp
     image: fy/rustapp:1.0.0
     build:
-      context: ./backend
+      context: ./rust_backend
       dockerfile: rust.dockerfile
       args:
         DATABASE_URL: postgres://postgres:postgres@db:5432/postgres
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+  goapp:
+    container_name: goapp
+    image: fy/goapp:1.0.0
+    build:
+      context: ./go_backend
+      dockerfile: go.dockerfile
+      args:
+        HOST: db
+        PORT: '5432'
+        USER: postgres
+        DBNAME: postgres
+        PASSWORD: postgres
     ports:
       - '8080:8080'
     depends_on:

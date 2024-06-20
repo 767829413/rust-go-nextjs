@@ -1,5 +1,5 @@
 # Build stage
-FROM rust:1.69-buster AS builder
+FROM rust:1.75-buster AS builder
 
 WORKDIR /app
 
